@@ -11,6 +11,7 @@ class User(AbstractUser):
         max_length=150,
         editable=False,
     )
+    profile_photo = models.ImageField(blank=True)
     name = models.CharField(
         max_length=150,
     )

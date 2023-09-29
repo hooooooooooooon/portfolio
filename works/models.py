@@ -1,12 +1,21 @@
 from django.db import models
+from common.models import CommonModel
 
-class Work(models.Model):
+
+class Work(CommonModel):
 
     """Model Definition for Work"""
 
+    class ThemeChoices(models.TextChoices):
+        PROFESSIONAL_WORKS = ("pro", "Pro")
+        EDUCATIONAL_WORKS = ("edu", "Edu")
+
     main_title = models.CharField(max_length=140)
     sub_title = models.CharField(max_length=140)
-    theme = models.CharField(max_length=40)
+    theme = models.CharField(
+        max_length=40,
+        choices=ThemeChoices.choices,
+    )
     category = models.CharField(max_length=50)
     company = models.CharField(max_length=40)
     project_summary = models.CharField(max_length=255)
@@ -21,9 +30,13 @@ class Work(models.Model):
     result = models.CharField(max_length=80)
     design_period = models.CharField(max_length=40)
     construction_period = models.CharField(max_length=40)
-    site_area = models.DecimalField(max_digits = 12, decimal_places = 4)
-    coverage_area = models.DecimalField(max_digits = 12, decimal_places = 4)
-    gross_floor_area = models.DecimalField(max_digits = 12, decimal_places = 4, verbose_name="GFA")
+    site_area = models.DecimalField(max_digits=12, decimal_places=4)
+    coverage_area = models.DecimalField(max_digits=12, decimal_places=4)
+    gross_floor_area = models.DecimalField(
+        max_digits=12,
+        decimal_places=4,
+        verbose_name="GFA",
+    )
     stories = models.IntegerField()
     project_introduction = models.CharField(max_length=255)
     project_prologue = models.CharField(max_length=255)
@@ -34,8 +47,10 @@ class Work(models.Model):
     retail_design_strategy = models.CharField(max_length=255)
     amenity_design_strategy = models.CharField(max_length=255)
     unit_planning = models.CharField(max_length=255)
-    owner = models.ForeignKey("users.User", on_delete=models.CASCADE)
+    owner = models.ForeignKey(
+        "users.User",
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
         return self.title
-
