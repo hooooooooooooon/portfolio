@@ -6,17 +6,8 @@ class Work(CommonModel):
 
     """Model Definition for Work"""
 
-    class ThemeChoices(models.TextChoices):
-        PROFESSIONAL_WORKS = ("pro", "Pro")
-        EDUCATIONAL_WORKS = ("edu", "Edu")
-
     main_title = models.CharField(max_length=140)
     sub_title = models.CharField(max_length=140)
-    theme = models.CharField(
-        max_length=40,
-        choices=ThemeChoices.choices,
-    )
-    category = models.CharField(max_length=50)
     company = models.CharField(max_length=40)
     project_summary = models.CharField(max_length=255)
     role = models.PositiveIntegerField()
@@ -50,6 +41,12 @@ class Work(CommonModel):
     owner = models.ForeignKey(
         "users.User",
         on_delete=models.CASCADE,
+    )
+    category = models.ForeignKey(
+        "categories.Category",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
     )
 
     def __str__(self):
