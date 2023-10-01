@@ -14,6 +14,9 @@ strawberry-graphql = {extras = ["debug-server"], version = "^0.209.2"}
 strawberry-graphql-django = "^0.18.0"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^23.9.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
