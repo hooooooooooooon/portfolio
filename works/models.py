@@ -50,4 +50,4 @@ class Work(CommonModel):
     )
 
     def __str__(self):
-        return self.title
+        return self.main_title
